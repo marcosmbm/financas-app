@@ -10,6 +10,10 @@ export const SubmitButton = styled.TouchableOpacity.attrs({
     border-radius: 8px;
     align-items: center;
     justify-content: center;
+
+    &:disabled{
+        opacity: 0.8;
+    }
 `;
 
 export const SubmitButtonText = styled.Text`
