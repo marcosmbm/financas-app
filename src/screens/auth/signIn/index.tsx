@@ -4,7 +4,7 @@ import { Platform } from "react-native";
 import { Container, Content } from "./styles";
 
 import { Background } from "@components/ui/Background";
-import { Logo } from "@components/ui/logo";
+import { Logo } from "@components/ui/Logo";
 import { Input, AreaInput } from "@components/ui/Input";
 import {
   SubmitButton,
