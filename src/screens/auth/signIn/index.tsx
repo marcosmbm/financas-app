@@ -6,12 +6,7 @@ import { Container, Content } from "./styles";
 import { Background } from "@components/ui/Background";
 import { Logo } from "@components/ui/Logo";
 import { Input, AreaInput } from "@components/ui/Input";
-import {
-  SubmitButton,
-  SubmitButtonText,
-  Link,
-  LinkText,
-} from "@components/ui/Button";
+import { Button } from "@components/ui/Button";
 
 import type { AuthStackModel } from "@models/AuthRoutesModel";
 
@@ -39,13 +34,11 @@ export default function SignIn() {
             <Input placeholder="Sua senha" secureTextEntry />
           </AreaInput>
 
-          <SubmitButton>
-            <SubmitButtonText>Acessar</SubmitButtonText>
-          </SubmitButton>
+          <Button>Acessar</Button>
 
-          <Link onPress={onNavigate}>
-            <LinkText>Criar conta gratuita</LinkText>
-          </Link>
+          <Button onPress={onNavigate} variant="link">
+            Criar conta gratuita
+          </Button>
         </Content>
       </Container>
     </Background>

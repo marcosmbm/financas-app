@@ -9,7 +9,9 @@ export const AreaInput = styled.View`
     height: 45px;
 `;
 
-export const Input = styled.TextInput`
+export const Input = styled.TextInput.attrs({
+  placeholderTextColor: config.colors.black,
+})`
     flex: 1;
     font-size: 17px;
     padding: 0 10px;

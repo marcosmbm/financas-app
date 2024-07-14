@@ -6,7 +6,7 @@ import { Container, Content } from "../signIn/styles";
 
 import { Background } from "@components/ui/Background";
 import { Input, AreaInput } from "@components/ui/Input";
-import { SubmitButton, SubmitButtonText } from "@components/ui/Button";
+import { Button } from "@components/ui/Button";
 
 export default function SignUp() {
   const { signUp, isLoadingAuth } = useAuth();
@@ -61,9 +61,9 @@ export default function SignUp() {
             />
           </AreaInput>
 
-          <SubmitButton onPress={handleSignUp} disabled={isLoadingAuth}>
-            <SubmitButtonText>Cadastrar</SubmitButtonText>
-          </SubmitButton>
+          <Button onPress={handleSignUp} isLoading={isLoadingAuth}>
+            Cadastrar
+          </Button>
         </Content>
       </Container>
     </Background>
