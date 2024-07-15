@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "@hooks/useAuth";
 
-import { Platform } from "react-native";
+import { Alert, Platform } from "react-native";
 import { Container, Content } from "./styles";
 
 import { Background } from "@components/ui/Background";
@@ -13,8 +15,25 @@ import type { AuthStackModel } from "@models/AuthRoutesModel";
 export default function SignIn() {
   const navigation = useNavigation<AuthStackModel>();
 
+  const { isLoadingAuth, signIn } = useAuth();
+
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+
   function onNavigate() {
     navigation.navigate("signUp");
+  }
+
+  async function handleLogin() {
+    const email = inputEmail.trim();
+    const password = inputPassword.trim();
+
+    if (email === "" || password === "") {
+      Alert.alert("Preencha todos os campos!");
+      return;
+    }
+
+    await signIn(email, password);
   }
 
   return (
@@ -27,14 +46,26 @@ export default function SignIn() {
 
         <Content>
           <AreaInput>
-            <Input placeholder="Seu email" keyboardType="email-address" />
+            <Input
+              placeholder="Seu email"
+              keyboardType="email-address"
+              value={inputEmail}
+              onChangeText={(value) => setInputEmail(value)}
+            />
           </AreaInput>
 
           <AreaInput>
-            <Input placeholder="Sua senha" secureTextEntry />
+            <Input
+              placeholder="Sua senha"
+              secureTextEntry
+              value={inputPassword}
+              onChangeText={(value) => setInputPassword(value)}
+            />
           </AreaInput>
 
-          <Button>Acessar</Button>
+          <Button isLoading={isLoadingAuth} onPress={handleLogin}>
+            Acessar
+          </Button>
 
           <Button onPress={onNavigate} variant="link">
             Criar conta gratuita

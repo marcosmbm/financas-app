@@ -2,6 +2,7 @@ import { useAuth } from "@hooks/useAuth";
 import { View, ActivityIndicator } from "react-native";
 
 import AuthRoutes from "./auth.routes";
+import AppRoutes from "./app.routes";
 
 export default function Routes() {
   const { isLoading, signed } = useAuth();
@@ -14,5 +15,5 @@ export default function Routes() {
     );
   }
 
-  return signed ? <></> : <AuthRoutes />;
+  return signed ? <AppRoutes /> : <AuthRoutes />;
 }
