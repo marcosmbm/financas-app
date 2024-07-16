@@ -1,8 +1,7 @@
 import { useAuth } from "@hooks/useAuth";
 import { useBalance } from "@hooks/useBalance";
 
-import { View, Text, Button, FlatList } from "react-native";
-import { ListBalance } from "./styles";
+import { FlatList } from "react-native";
 
 import { Background } from "@components/ui/Background";
 import { Header } from "@components/header";

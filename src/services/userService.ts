@@ -9,6 +9,9 @@ export async function getBalanceUserService(
     headers: {
       Authorization: `Bearer ${token}`,
     },
+    params: {
+      date,
+    },
   });
   return response.data;
 }

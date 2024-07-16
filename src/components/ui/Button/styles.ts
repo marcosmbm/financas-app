@@ -2,7 +2,7 @@ import styled, { css } from "styled-components/native";
 import { config } from "src/styles/config";
 
 interface ButtonStylesProps {
-  variant: "solid" | "link";
+  variant: "solid" | "link" | "secondary";
 }
 
 export const ButtonContainer = styled.TouchableOpacity.attrs({
@@ -25,6 +25,12 @@ export const ButtonContainer = styled.TouchableOpacity.attrs({
       css`
         background-color: transparent;
     `}
+
+    ${(props) =>
+      props.variant === "secondary" &&
+      css`
+        background-color: ${config.colors.green};
+    `}
 `;
 
 export const ButtonText = styled.Text<ButtonStylesProps>`
@@ -41,5 +47,11 @@ export const ButtonText = styled.Text<ButtonStylesProps>`
       props.variant === "link" &&
       css`
         color: ${config.colors.black};
+      `}
+
+      ${(props) =>
+        props.variant === "secondary" &&
+        css`
+        color: ${config.colors.white};
       `}
 `;

@@ -4,7 +4,7 @@ import type { TouchableOpacityProps } from "react-native";
 import { ButtonContainer, ButtonText } from "./styles";
 
 interface ButtonProps extends TouchableOpacityProps {
-  variant?: "solid" | "link";
+  variant?: "solid" | "link" | "secondary";
   isLoading?: boolean;
   children: React.ReactNode;
 }

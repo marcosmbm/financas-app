@@ -12,6 +12,8 @@ import {
 import { getErrorMessage } from "@utils/errorMessage";
 import { saveItem, getItem, removeItem } from "@utils/asyncStorageService";
 
+import api from "@services/api";
+
 import type { UserModel } from "@models/UserModel";
 interface AuthContextProps {
   signed: boolean;
@@ -45,6 +47,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
           const { id, name, email, balance } =
             await userDetailService(tokenStorage);
           setUser({ id, name, email, balance, token: tokenStorage });
+
+          api.defaults.headers.Authorization = `Bearer ${tokenStorage}`;
         }
       } catch (error) {
         console.log(error);

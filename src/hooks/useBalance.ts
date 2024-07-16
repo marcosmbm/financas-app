@@ -24,6 +24,8 @@ export function useBalance() {
       const dateFormatted = format(dateMovements, "dd/MM/yyyyy");
       const balance = await getBalanceUserService(token, dateFormatted);
 
+      console.log(balance);
+
       setListBalance(balance);
     }
 

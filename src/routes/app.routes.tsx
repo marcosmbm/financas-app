@@ -1,9 +1,13 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Home from "@screens/home";
+import New from "@screens/new";
+
 import { config } from "src/styles/config";
 
-const Drawer = createDrawerNavigator();
+import type { AppDrawerParamListModel } from "@models/AppRoutesModel";
+
+const Drawer = createDrawerNavigator<AppDrawerParamListModel>();
 
 export default function AppRoutes() {
   return (
@@ -18,6 +22,11 @@ export default function AppRoutes() {
       }}
     >
       <Drawer.Screen name="home" component={Home} />
+      <Drawer.Screen
+        name="new"
+        component={New}
+        options={{ title: "Registrar" }}
+      />
     </Drawer.Navigator>
   );
 }
