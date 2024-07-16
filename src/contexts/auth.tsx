@@ -10,7 +10,7 @@ import {
 } from "@services/authService";
 
 import { getErrorMessage } from "@utils/errorMessage";
-import { saveItem, getItem } from "@utils/asyncStorageService";
+import { saveItem, getItem, removeItem } from "@utils/asyncStorageService";
 
 import type { UserModel } from "@models/UserModel";
 interface AuthContextProps {
@@ -19,6 +19,7 @@ interface AuthContextProps {
   isLoadingAuth: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (name: string, email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -93,6 +94,15 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  async function signOut() {
+    try {
+      await removeItem("finToken");
+      setUser(null);
+    } catch (error) {
+      Alert.alert("Erro ao deslogar");
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -101,6 +111,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         isLoadingAuth,
         signIn,
         signUp,
+        signOut,
       }}
     >
       {children}
