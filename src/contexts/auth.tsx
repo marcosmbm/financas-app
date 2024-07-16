@@ -15,6 +15,7 @@ import { saveItem, getItem, removeItem } from "@utils/asyncStorageService";
 import type { UserModel } from "@models/UserModel";
 interface AuthContextProps {
   signed: boolean;
+  user: UserModel | null;
   isLoading: boolean;
   isLoadingAuth: boolean;
   signIn: (email: string, password: string) => Promise<void>;
@@ -107,6 +108,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     <AuthContext.Provider
       value={{
         signed: !!user,
+        user,
         isLoading,
         isLoadingAuth,
         signIn,

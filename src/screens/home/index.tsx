@@ -1,17 +1,31 @@
 import { useAuth } from "@hooks/useAuth";
-import { View, Text, Button } from "react-native";
+import { useBalance } from "@hooks/useBalance";
+
+import { View, Text, Button, FlatList } from "react-native";
+import { ListBalance } from "./styles";
 
 import { Background } from "@components/ui/Background";
 import { Header } from "@components/header";
+import { BalanceItem } from "@components/balanceItem";
+
+import type { BalanceModel } from "@models/BalanceModel";
 
 export default function Home() {
   const { signOut } = useAuth();
+  const { listBalance } = useBalance();
+
   return (
     <Background>
       <Header title="Minhas movimentações" />
-      <Text>Home</Text>
 
-      <Button title="Deslogar" onPress={() => signOut()} />
+      <FlatList
+        data={listBalance}
+        keyExtractor={(item) => (item as BalanceModel).tag}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => <BalanceItem balance={item} />}
+        style={{ maxHeight: 190 }}
+      />
     </Background>
   );
 }
