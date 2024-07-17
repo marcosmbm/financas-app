@@ -2,6 +2,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Home from "@screens/home";
 import New from "@screens/new";
+import Profile from "@screens/profile";
 
 import { config } from "src/styles/config";
 
@@ -26,6 +27,12 @@ export default function AppRoutes() {
         name="new"
         component={New}
         options={{ title: "Registrar" }}
+      />
+
+      <Drawer.Screen
+        name="profile"
+        component={Profile}
+        options={{ title: "Meu perfil" }}
       />
     </Drawer.Navigator>
   );

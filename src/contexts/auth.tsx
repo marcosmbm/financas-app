@@ -74,6 +74,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         email,
         balance: 0,
       });
+
+      api.defaults.headers.Authorization = `Bearer ${token}`;
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       Alert.alert(errorMessage);
@@ -101,7 +103,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
   async function signOut() {
     try {
-      await removeItem("finToken");
+      await removeItem("@finToken");
       setUser(null);
     } catch (error) {
       Alert.alert("Erro ao deslogar");

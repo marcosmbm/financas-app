@@ -2,7 +2,7 @@ import styled, { css } from "styled-components/native";
 import { config } from "src/styles/config";
 
 interface ButtonStylesProps {
-  variant: "solid" | "link" | "secondary";
+  variant: "solid" | "link" | "secondary" | "logout";
 }
 
 export const ButtonContainer = styled.TouchableOpacity.attrs({
@@ -31,6 +31,14 @@ export const ButtonContainer = styled.TouchableOpacity.attrs({
       css`
         background-color: ${config.colors.green};
     `}
+
+    ${(props) =>
+      props.variant === "logout" &&
+      css`
+        background-color: transparent;
+        border-width: 1px;
+        border-color: ${config.colors.red};
+    `}
 `;
 
 export const ButtonText = styled.Text<ButtonStylesProps>`
@@ -54,4 +62,11 @@ export const ButtonText = styled.Text<ButtonStylesProps>`
         css`
         color: ${config.colors.white};
       `}
+
+      ${(props) =>
+        props.variant === "logout" &&
+        css`
+        color: ${config.colors.red};
+        font-weight: bold;
+    `}
 `;
