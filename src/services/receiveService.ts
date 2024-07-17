@@ -25,3 +25,11 @@ export async function getReceivesService(date: string) {
 
   return response.data;
 }
+
+export async function removeReceiveService(id: string) {
+  await api.delete("/receives/delete", {
+    params: {
+      item_id: id,
+    },
+  });
+}

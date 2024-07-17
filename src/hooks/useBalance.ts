@@ -3,7 +3,10 @@ import { useAuth } from "./useAuth";
 import { useIsFocused } from "@react-navigation/native";
 
 import { getBalanceUserService } from "@services/userService";
-import { getReceivesService } from "@services/receiveService";
+import {
+  getReceivesService,
+  removeReceiveService,
+} from "@services/receiveService";
 
 import type { BalanceModel } from "@models/BalanceModel";
 import type { ReceiveModel } from "@models/ReceiveModel";
@@ -48,9 +51,19 @@ export function useBalance() {
     };
   }, [dateMovements, isFocused, signOut]);
 
+  async function removeMovement(id: string) {
+    try {
+      await removeReceiveService(id);
+      setDateMovements(new Date());
+    } catch (error) {
+      Alert.alert("Erro ao deletar a movimentação");
+    }
+  }
+
   return {
     listBalance,
     movements,
     isLoading,
+    removeMovement,
   };
 }

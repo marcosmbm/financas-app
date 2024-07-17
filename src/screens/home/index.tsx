@@ -13,7 +13,7 @@ import { Loader } from "@components/loader";
 import { config } from "src/styles/config";
 
 export default function Home() {
-  const { listBalance, movements, isLoading } = useBalance();
+  const { listBalance, movements, isLoading, removeMovement } = useBalance();
 
   if (isLoading) {
     return <Loader />;
@@ -42,7 +42,9 @@ export default function Home() {
       <List
         data={movements}
         keyExtractor={(item) => item.id as string}
-        renderItem={({ item }) => <ReceiveItem receive={item} />}
+        renderItem={({ item }) => (
+          <ReceiveItem removeMovement={removeMovement} receive={item} />
+        )}
         showsVerticalScrollIndicator={false}
       />
     </Background>
