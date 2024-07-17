@@ -77,6 +77,10 @@ export default function New() {
       await registerReceiveService({ receive });
 
       navigation.navigate("home");
+
+      setInputDescription("");
+      setInputValue("");
+      setType("receita");
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       Alert.alert(errorMessage);
