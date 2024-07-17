@@ -4,6 +4,8 @@ import Home from "@screens/home";
 import New from "@screens/new";
 import Profile from "@screens/profile";
 
+import { CustomDrawer } from "@components/customDrawer";
+
 import { config } from "src/styles/config";
 
 import type { AppDrawerParamListModel } from "@models/AppRoutesModel";
@@ -13,6 +15,7 @@ const Drawer = createDrawerNavigator<AppDrawerParamListModel>();
 export default function AppRoutes() {
   return (
     <Drawer.Navigator
+      drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
         drawerStyle: { backgroundColor: config.colors.white, paddingTop: 20 },
@@ -22,7 +25,8 @@ export default function AppRoutes() {
         drawerInactiveTintColor: config.colors.black,
       }}
     >
-      <Drawer.Screen name="home" component={Home} />
+      <Drawer.Screen name="home" component={Home} options={{ title: "Home" }} />
+
       <Drawer.Screen
         name="new"
         component={New}
