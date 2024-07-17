@@ -15,3 +15,13 @@ export async function registerReceiveService({
     date: receive.date,
   });
 }
+
+export async function getReceivesService(date: string) {
+  const response = await api.get("/receives", {
+    params: {
+      date,
+    },
+  });
+
+  return response.data;
+}
