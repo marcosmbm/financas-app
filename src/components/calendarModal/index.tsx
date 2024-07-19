@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { View, TouchableWithoutFeedback } from "react-native";
 import { Container, Content } from "./styles";
@@ -10,6 +10,7 @@ import type { MarkedDates } from "react-native-calendars/src/types";
 import { config } from "src/styles/config";
 
 import { ptBr } from "./localeCalendar";
+import { format } from "date-fns";
 
 LocaleConfig.locales["pt-br"] = ptBr;
 LocaleConfig.defaultLocale = "pt-br";
@@ -27,6 +28,21 @@ export function CalendarModal({
 }: CalendarProps) {
   const [dateNow, setDateNow] = useState(currentDate || new Date());
   const [markedDates, setMarkedDates] = useState({} as MarkedDates);
+
+  useEffect(() => {
+    const date = new Date(currentDate);
+    const onlyDate = date.valueOf() + date.getTimezoneOffset() * 60 * 1000;
+    const dateFormatted = format(onlyDate, "yyyy-MM-dd");
+
+    const marked: MarkedDates = {};
+
+    marked[dateFormatted] = {
+      selected: true,
+      selectedColor: config.colors.blue,
+      textColor: config.colors.white,
+    };
+    setMarkedDates(marked);
+  }, [currentDate]);
 
   function handleOnDayPress(date: DateData) {
     setDateNow(new Date(date.dateString));
