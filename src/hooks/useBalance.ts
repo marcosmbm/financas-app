@@ -28,7 +28,10 @@ export function useBalance() {
 
     async function getMovements() {
       try {
-        const dateFormatted = format(dateMovements, "dd/MM/yyyy");
+        const date = new Date(dateMovements);
+        const onlyDate = date.valueOf() + date.getTimezoneOffset() * 60 * 1000;
+
+        const dateFormatted = format(onlyDate, "dd/MM/yyyy");
 
         const balance = await getBalanceUserService(dateFormatted);
         const receives = await getReceivesService(dateFormatted);
@@ -60,10 +63,16 @@ export function useBalance() {
     }
   }
 
+  function onFilterDate(dateSelected: Date) {
+    setDateMovements(dateSelected);
+  }
+
   return {
     listBalance,
     movements,
     isLoading,
+    dateMovements,
     removeMovement,
+    onFilterDate,
   };
 }
